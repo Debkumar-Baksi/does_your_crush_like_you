@@ -6,7 +6,7 @@ Demo: [LinkedIn](https://www.linkedin.com/posts/debkumar-baksi-269738279_machine
 
 navigate to backend and run the backend first: uvicorn main:app --reload
 
-thrn run the frontend.
+then run the frontend.
 
 the model is the .keras extension one.
 
