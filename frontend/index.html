@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crush Predictor 💘</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+        }
+        input, button {
+            width: 100%;
+            margin: 5px 0;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Crush Predictor 💘</h2>
+
+<input id="looks" type="number" placeholder="Looks (1–10)">
+<input id="height" type="number" placeholder="Height (cm)">
+<input id="confidence" type="number" placeholder="Confidence (1–10)">
+<input id="talk" type="number" placeholder="Talk Frequency (1–10)">
+<input id="interests" type="number" placeholder="Shared Interests (1–10)">
+
+<button onclick="predict()">Predict</button>
+
+<h3 id="result"></h3>
+
+<script>
+async function predict() {
+    const payload = {
+        looks: +looks.value,
+        height: +height.value,
+        confidence: +confidence.value,
+        talk_frequency: +talk.value,
+        shared_interests: +interests.value
+    };
+
+    const res = await fetch("http://127.0.0.1:8000/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    document.getElementById("result").innerText =
+        `Probability: ${data.probability.toFixed(2)} — ` +
+        (data.likes_you ? "Likes you ❤️" : "Doesn't like you 😔");
+}
+</script>
+
+</body>
+</html>
